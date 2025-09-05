@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virgilio, Aeneis - Liber I (Versos 12-33)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- ESTILOS MEDIEVALES PERSONALIZADOS --- */
+        body {
+            background-color: #3d2c1d;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #4a3a2a;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        .book-page {
+            background-color: #fdf5e6;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+            border: 1px solid #c9b79c;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            max-width: 1200px;
+            width: 100%;
+            border-radius: 4px;
+        }
+        .textum-classicum, #context-content {
+            font-family: 'IM Fell English', 'Georgia', serif;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #5c4d3c;
+        }
+        h1, h2, h3 {
+            font-family: 'IM Fell English', 'Georgia', serif;
+            font-weight: bold;
+            color: #6d4c35;
+        }
+        #main-title { font-size: 3.5rem; }
+        #subtitle { font-size: 1.75rem; }
+        #context-title, #text-title, #analysis-title { font-size: 1.5rem; }
+        .verbum {
+            cursor: pointer;
+            transition: color .2s ease-in-out;
+            border-bottom: 1px dotted transparent;
+        }
+        .verbum:hover {
+            background-color: rgba(181, 152, 114, 0.2);
+            border-bottom: 1px dotted #8c785c;
+        }
+        .activus {
+            background-color: rgba(181, 152, 114, 0.4) !important;
+            color: #3d2c1d !important;
+            font-weight: bold;
+        }
+        .verse-number {
+            color: #9a3412;
+            font-weight: bold;
+        }
+        .divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(109, 76, 53, 0), rgba(109, 76, 53, 0.75), rgba(109, 76, 53, 0));
+            margin: 2rem 0;
+        }
+        #language-switcher { display: flex; gap: 0.5rem; padding-bottom: 1rem; }
+        .lang-btn { 
+            padding: 0.5rem; border: 1px solid #d1c4b0; background-color: #f5eadb; color: #6d4c35;
+            border-radius: 0.25rem; cursor: pointer; font-weight: 600; transition: all 0.2s; 
+            font-size: 0.875rem; font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        .lang-btn:hover { background-color: #e9dcc9; }
+        .lang-btn.active-lang { background-color: #6d4c35; color: #fdf5e6; border-color: #6d4c35; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::before { content: '▶'; margin-right: 0.5rem; font-size: 0.8em; transition: transform 0.2s; color: #8c785c;}
+        details[open] > summary { color: #3d2c1d; }
+        details[open] > summary::before { transform: rotate(90deg); }
+        details .details-content { padding-left: 1.2rem; margin-top: 0.5rem; border-left: 1px solid #d1c4b0; }
+        #marginalia-contentus .text-2xl { color: #6d4c35; }
+        #marginalia-contentus .text-lg { color: #8c785c; }
+        #marginalia-contentus .text-sm { color: #5c4d3c; }
+        .main-layout { padding: 1.5rem; }
+        #marginalia-sinistra { 
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d1c4b0;
+        }
+        @media (min-width: 1024px) {
+            .main-layout {
+                display: grid;
+                grid-template-columns: 4fr 1fr;
+                gap: 2rem;
+                padding: 2.5rem 3rem;
+            }
+            #marginalia-sinistra {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+                position: sticky;
+                top: 2.5rem;
+                height: calc(100vh - 5rem);
+                border-left: 1px solid #d1c4b0;
+                padding-left: 2rem;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-page">
+        <div class="main-layout">
+            <div id="textum-principale">
+                <header>
+                    <div id="language-switcher" class="mb-4">
+                        <button data-lang="es" class="lang-btn active-lang">Español</button>
+                        <button data-lang="en" class="lang-btn">English</button>
+                        <button data-lang="zh" class="lang-btn">中文 (繁體)</button>
+                    </div>
+                    <p id="author" class="text-sm font-semibold uppercase tracking-wider text-[#8c785c]"></p>
+                    <h1 id="main-title" class="mb-2"></h1>
+                    <h2 id="subtitle" class=""></h2>
+                </header>
+                <hr class="divider">
+                <section id="introductio" class="mb-10">
+                    <h3 id="context-title" class="mb-2"></h3>
+                    <p id="context-content" class="text-justify leading-relaxed"></p>
+                </section>
+                <section id="text-et-analisi">
+                    <h3 id="text-title" class="mb-4"></h3>
+                    <div id="paragrafus-contentus" class="textum-classicum">
+                        </div>
+                </section>
+
+                <hr class="divider my-10">
+
+                <div class="flex justify-between items-center mb-6">
+                    <a href="verso1.html" class="flex-1 mr-4 lang-btn text-center hover:bg-amber-800 hover:text-white transition">
+                        <span class="font-['IM_Fell_English']">&laquo; Versos Anteriores</span>
+                    </a>
+                    <a href="verso3.html" class="flex-1 ml-4 lang-btn text-center hover:bg-teal-800 hover:text-white transition">
+                        <span class="font-['IM_Fell_English']">Siguientes Versos &raquo;</span>
+                    </a>
+                </div>
+
+            </div>
+            <aside id="marginalia-sinistra">
+                <h3 id="analysis-title" class="mb-4">Análisis</h3>
+                <div id="marginalia-contentus">
+                    <p class="text-[#6d4c35] font-['IM_Fell_English']">Haz clic en una palabra en el texto para ver su análisis.</p>
+                </div>
+            </aside>
+        </div>
+        <footer class="text-center py-4 border-t border-[#d1c4b0]">
+            <p id="footer-text" class="text-sm text-[#8c785c]"></p>
+        </footer>
+    </div>
+
+    <script>
+        const corpus = {
+            "titulus_principalis": "Aeneis",
+            "titulus_secundarius": { 
+                "es": "Liber Primus: La Ira de Juno (12-33)", 
+                "en": "Book One: The Wrath of Juno (12-33)", 
+                "zh": "卷一: 朱諾的憤怒 (12-33)" 
+            },
+            "auctor": "Publius Vergilius Maro",
+            "introductio": {
+                "es": { "titulus": "Contexto: Las Causas del Odio", "contentus": "Tras la invocación, el poeta se adentra en las raíces del conflicto. La ira de Juno no es un capricho momentáneo, sino un odio profundo y antiguo. Virgilio nos presenta Cartago, la ciudad amada por la diosa, y revela su temor a la profecía de que una estirpe troyana la destruiría. A este temor se suman afrentas personales: el Juicio de Paris, que la despreció; el rapto de Ganimedes, un troyano, para ser copero de los dioses; y su apoyo incondicional a los griegos en la Guerra de Troya. Esta acumulación de agravios alimenta su persecución implacable contra Eneas y los supervivientes." },
+                "en": { "titulus": "Context: The Causes of Hatred", "contentus": "After the invocation, the poet delves into the roots of the conflict. Juno's anger is not a momentary whim but a deep and ancient hatred. Virgil introduces us to Carthage, the city beloved by the goddess, and reveals her fear of the prophecy that a Trojan lineage would destroy it. Added to this fear are personal affronts: the Judgment of Paris, who scorned her; the abduction of Ganymede, a Trojan, to be the cupbearer of the gods; and her unconditional support for the Greeks in the Trojan War. This accumulation of grievances fuels her relentless persecution of Aeneas and the survivors." },
+                "zh": { "titulus": "背景: 仇恨的緣由", "contentus": "在祈求之後，詩人深入探討了衝突的根源。朱諾的憤怒並非一時的任性，而是一種深刻而古老的仇恨。維吉爾向我們介紹了女神鍾愛的城市迦太基，並揭示了她對一個特洛伊血統將摧毀這座城市的預言的恐懼。除了這種恐懼之外，還有個人的侮辱：帕里斯的審判，帕里斯對她不屑一顧；特洛伊人伽倪墨得斯被綁架成為眾神的侍酒者；以及她在特洛伊戰爭中對希臘人的無條件支持。這些積累的不滿助長了她對埃涅阿斯和倖存者的無情迫害。" }
+            },
+            "textus": {
+                "capitula": [
+                    { "numerus": 12, "orationes": [ { "original_lat": "Urbs antiqua fuit, Tyrii tenuere coloni,", "verba": [ {"textus": "Urbs", "lemma": "urbs", "morphologia": "f., sg., nom.", "syntaxis": "Sujeto de fuit", "translatio": {"es": "una ciudad", "en": "a city", "zh": "一座城市"}}, {"textus": "antiqua", "lemma": "antiquus", "morphologia": "adj., f., sg., nom.", "syntaxis": "Atributo de Urbs", "translatio": {"es": "antigua", "en": "ancient", "zh": "古老的"}}, {"textus": "fuit,", "lemma": "sum", "morphologia": "v., 3ª pers., sg., perf., ind.", "syntaxis": "Verbo principal", "translatio": {"es": "hubo", "en": "there was", "zh": "曾經是"}}, {"textus": "Tyrii", "lemma": "Tyrius", "morphologia": "adj., m., pl., nom.", "syntaxis": "Modifica a coloni", "translatio": {"es": "tirios", "en": "Tyrian", "zh": "推羅的"}}, {"textus": "tenuere", "lemma": "teneo", "morphologia": "v., 3ª pers., pl., perf., ind.", "syntaxis": "Verbo", "translatio": {"es": "ocuparon", "en": "held", "zh": "佔據"}}, {"textus": "coloni,", "lemma": "colonus", "morphologia": "m., pl., nom.", "syntaxis": "Sujeto de tenuere", "translatio": {"es": "colonos", "en": "settlers", "zh": "殖民者"}} ] } ] },
+                    { "numerus": 13, "orationes": [ { "original_lat": "Karthago, Italiam contra Tiberinaque longe", "verba": [ {"textus": "Karthago,", "lemma": "Karthago", "morphologia": "f., sg., nom.", "syntaxis": "Aposición de Urbs", "translatio": {"es": "Cartago", "en": "Carthage", "zh": "迦太基"}}, {"textus": "Italiam", "lemma": "Italia", "morphologia": "f., sg., acc.", "syntaxis": "Complemento de contra", "translatio": {"es": "a Italia", "en": "Italy", "zh": "義大利"}}, {"textus": "contra", "lemma": "contra", "morphologia": "prep. + acc.", "syntaxis": "Preposición", "translatio": {"es": "enfrente de", "en": "opposite", "zh": "對面"}}, {"textus": "Tiberinaque", "lemma": "Tiberinus", "morphologia": "adj., n., pl., acc. (+que)", "syntaxis": "Modifica a ostia (v. 14)", "translatio": {"es": "y del Tíber", "en": "and Tiberine", "zh": "和台伯河的"}}, {"textus": "longe", "lemma": "longe", "morphologia": "adv.", "syntaxis": "Adverbio", "translatio": {"es": "a lo lejos", "en": "far off", "zh": "遠處"}} ] } ] },
+                    { "numerus": 14, "orationes": [ { "original_lat": "ostia, dives opum studiisque asperrima belli;", "verba": [ {"textus": "ostia,", "lemma": "ostium", "morphologia": "n., pl., acc.", "syntaxis": "Complemento de contra", "translatio": {"es": "las desembocaduras", "en": "the mouths", "zh": "河口"}}, {"textus": "dives", "lemma": "dives", "morphologia": "adj., f., sg., nom.", "syntaxis": "Modifica a Urbs/Karthago", "translatio": {"es": "rica", "en": "rich", "zh": "富有的"}}, {"textus": "opum", "lemma": "ops", "morphologia": "f., pl., gen.", "syntaxis": "Genitivo de especificación con dives", "translatio": {"es": "en recursos", "en": "in resources", "zh": "資源"}}, {"textus": "studiisque", "lemma": "studium", "morphologia": "n., pl., abl. (+que)", "syntaxis": "Ablativo de especificación con asperrima", "translatio": {"es": "y en afanes", "en": "and in pursuits", "zh": "並且在追求上"}}, {"textus": "asperrima", "lemma": "asper", "morphologia": "adj. superl., f., sg., nom.", "syntaxis": "Modifica a Urbs/Karthago", "translatio": {"es": "muy fiera", "en": "very harsh", "zh": "最兇猛的"}}, {"textus": "belli;", "lemma": "bellum", "morphologia": "n., sg., gen.", "syntaxis": "Genitivo objetivo con studiis", "translatio": {"es": "de la guerra", "en": "of war", "zh": "戰爭的"}} ] } ] },
+                    { "numerus": 15, "orationes": [ { "original_lat": "quam Iuno fertur terris magis omnibus unam", "verba": [ {"textus": "quam", "lemma": "qui", "morphologia": "pron. rel., f., sg., acc.", "syntaxis": "Sujeto acusativo de coluisse", "translatio": {"es": "la cual", "en": "which", "zh": "這個地方"}}, {"textus": "Iuno", "lemma": "Iuno", "morphologia": "f., sg., nom.", "syntaxis": "Sujeto de fertur", "translatio": {"es": "Juno", "en": "Juno", "zh": "朱諾"}}, {"textus": "fertur", "lemma": "fero", "morphologia": "v., 3ª pers., sg., pres., ind., pas.", "syntaxis": "Verbo (construcción personal)", "translatio": {"es": "se dice que", "en": "is said", "zh": "據說"}}, {"textus": "terris", "lemma": "terra", "morphologia": "f., pl., abl.", "syntaxis": "Ablativo de comparación", "translatio": {"es": "que las tierras", "en": "than lands", "zh": "比土地"}}, {"textus": "magis", "lemma": "magis", "morphologia": "adv.", "syntaxis": "Adverbio comparativo", "translatio": {"es": "más", "en": "more", "zh": "更"}}, {"textus": "omnibus", "lemma": "omnis", "morphologia": "adj., f., pl., abl.", "syntaxis": "Modifica a terris", "translatio": {"es": "todas las", "en": "all", "zh": "所有的"}}, {"textus": "unam", "lemma": "unus", "morphologia": "adj., f., sg., acc.", "syntaxis": "Modifica a quam", "translatio": {"es": "sola", "en": "alone", "zh": "唯一"}} ] } ] },
+                    { "numerus": 16, "orationes": [ { "original_lat": "posthabita coluisse Samo; hic illius arma,", "verba": [ {"textus": "posthabita", "lemma": "posthabeo", "morphologia": "part., f., sg., abl., pf.", "syntaxis": "Participio en ablativo absoluto", "translatio": {"es": "pospuesta", "en": "having been esteemed less", "zh": "被輕視"}}, {"textus": "coluisse", "lemma": "colo", "morphologia": "v., inf., perf., act.", "syntaxis": "Infinitivo dependiente de fertur", "translatio": {"es": "amó", "en": "to have cherished", "zh": "愛護"}}, {"textus": "Samo;", "lemma": "Samos", "morphologia": "f., sg., abl.", "syntaxis": "Término del ablativo absoluto", "translatio": {"es": "Samos", "en": "Samos", "zh": "薩摩斯"}}, {"textus": "hic", "lemma": "hic", "morphologia": "adv.", "syntaxis": "Adverbio de lugar", "translatio": {"es": "aquí", "en": "here", "zh": "這裡"}}, {"textus": "illius", "lemma": "ille", "morphologia": "pron., f., sg., gen.", "syntaxis": "Genitivo posesivo", "translatio": {"es": "de ella", "en": "her", "zh": "她的"}}, {"textus": "arma,", "lemma": "arma", "morphologia": "n., pl., nom.", "syntaxis": "Sujeto de fuit (v. 17)", "translatio": {"es": "sus armas", "en": "arms", "zh": "武器"}} ] } ] },
+                    { "numerus": 17, "orationes": [ { "original_lat": "hic currus fuit; hoc regnum dea gentibus esse,", "verba": [ {"textus": "hic", "lemma": "hic", "morphologia": "adv.", "syntaxis": "Adverbio de lugar", "translatio": {"es": "aquí", "en": "here", "zh": "這裡"}}, {"textus": "currus", "lemma": "currus", "morphologia": "m., sg., nom.", "syntaxis": "Sujeto de fuit", "translatio": {"es": "su carro", "en": "chariot", "zh": "戰車"}}, {"textus": "fuit;", "lemma": "sum", "morphologia": "v., 3ª pers., sg., perf., ind.", "syntaxis": "Verbo", "translatio": {"es": "estuvo", "en": "was", "zh": "是"}}, {"textus": "hoc", "lemma": "hic", "morphologia": "pron., n., sg., acc.", "syntaxis": "Sujeto acusativo de esse", "translatio": {"es": "este", "en": "this", "zh": "這個"}}, {"textus": "regnum", "lemma": "regnum", "morphologia": "n., sg., acc.", "syntaxis": "Predicado de hoc en Ac. + Inf.", "translatio": {"es": "el reino", "en": "the kingdom", "zh": "王國"}}, {"textus": "dea", "lemma": "dea", "morphologia": "f., sg., nom.", "syntaxis": "Sujeto de tendit y fovet (v. 18)", "translatio": {"es": "la diosa", "en": "the goddess", "zh": "女神"}}, {"textus": "gentibus", "lemma": "gens", "morphologia": "f., pl., dat.", "syntaxis": "Dativo de finalidad", "translatio": {"es": "para los pueblos", "en": "for the nations", "zh": "為各民族"}}, {"textus": "esse,", "lemma": "sum", "morphologia": "v., inf., pres.", "syntaxis": "Infinitivo en Ac. + Inf.", "translatio": {"es": "que fuera", "en": "to be", "zh": "是"}} ] } ] },
+                    { "numerus": 18, "orationes": [ { "original_lat": "si qua fata sinant, iam tum tenditque fovetque.", "verba": [ {"textus": "si", "lemma": "si", "morphologia": "conj.", "syntaxis": "Conjunción condicional", "translatio": {"es": "si", "en": "if", "zh": "如果"}}, {"textus": "qua", "lemma": "qui", "morphologia": "pron. indef., adv.", "syntaxis": "Adverbio de modo", "translatio": {"es": "de algún modo", "en": "in any way", "zh": "以任何方式"}}, {"textus": "fata", "lemma": "fatum", "morphologia": "n., pl., nom.", "syntaxis": "Sujeto de sinant", "translatio": {"es": "los hados", "en": "the fates", "zh": "命運"}}, {"textus": "sinant,", "lemma": "sino", "morphologia": "v., 3ª pers., pl., pres., subj.", "syntaxis": "Verbo de la condicional", "translatio": {"es": "lo permitieran", "en": "should allow", "zh": "允許"}}, {"textus": "iam", "lemma": "iam", "morphologia": "adv.", "syntaxis": "Adverbio de tiempo", "translatio": {"es": "ya", "en": "already", "zh": "已經"}}, {"textus": "tum", "lemma": "tum", "morphologia": "adv.", "syntaxis": "Adverbio de tiempo", "translatio": {"es": "entonces", "en": "then", "zh": "那時"}}, {"textus": "tenditque", "lemma": "tendo", "morphologia": "v., 3ª pers., sg., pres., ind. (+que)", "syntaxis": "Verbo principal", "translatio": {"es": "y se esfuerza", "en": "and she strives", "zh": "並且努力"}}, {"textus": "fovetque.", "lemma": "foveo", "morphologia": "v., 3ª pers., sg., pres., ind. (+que)", "syntaxis": "Verbo principal", "translatio": {"es": "y favorece", "en": "and she favors", "zh": "並且支持"}} ] } ] },
+                    { "numerus": 19, "orationes": [ { "original_lat": "Progeniem sed enim Troiano a sanguine duci", "verba": [ {"textus": "Progeniem", "lemma": "progenies", "morphologia": "f., sg., acc.", "syntaxis": "Sujeto acusativo de duci", "translatio": {"es": "una estirpe", "en": "an offspring", "zh": "一個後代"}}, {"textus": "sed", "lemma": "sed", "morphologia": "conj.", "syntaxis": "Conjunción adversativa", "translatio": {"es": "pero", "en": "but", "zh": "但是"}}, {"textus": "enim", "lemma": "enim", "morphologia": "conj.", "syntaxis": "Conjunción causal", "translatio": {"es": "en efecto", "en": "indeed", "zh": "確實"}}, {"textus": "Troiano", "lemma": "Troianus", "morphologia": "adj., n., sg., abl.", "syntaxis": "Modifica a sanguine", "translatio": {"es": "troyana", "en": "Trojan", "zh": "特洛伊的"}}, {"textus": "a", "lemma": "a", "morphologia": "prep. + abl.", "syntaxis": "Preposición de origen", "translatio": {"es": "de", "en": "from", "zh": "從"}}, {"textus": "sanguine", "lemma": "sanguis", "morphologia": "m., sg., abl.", "syntaxis": "Complemento de origen", "translatio": {"es": "sangre", "en": "blood", "zh": "血液"}}, {"textus": "duci", "lemma": "duco", "morphologia": "v., inf., pres., pas.", "syntaxis": "Infinitivo en Ac. + Inf. (depende de audierat)", "translatio": {"es": "que era engendrada", "en": "was being derived", "zh": "被引出"}} ] } ] },
+                    { "numerus": 20, "orationes": [ { "original_lat": "audierat, Tyrias olim quae verteret arces;", "verba": [ {"textus": "audierat,", "lemma": "audio", "morphologia": "v., 3ª pers., sg., plusc., ind.", "syntaxis": "Verbo principal", "translatio": {"es": "había oído", "en": "she had heard", "zh": "她曾聽說"}}, {"textus": "Tyrias", "lemma": "Tyrius", "morphologia": "adj., f., pl., acc.", "syntaxis": "Modifica a arces", "translatio": {"es": "tirias", "en": "Tyrian", "zh": "推羅的"}}, {"textus": "olim", "lemma": "olim", "morphologia": "adv.", "syntaxis": "Adverbio de tiempo", "translatio": {"es": "un día", "en": "one day", "zh": "有一天"}}, {"textus": "quae", "lemma": "qui", "morphologia": "pron. rel., f., sg., nom.", "syntaxis": "Sujeto de verteret", "translatio": {"es": "la cual", "en": "which", "zh": "那個"}}, {"textus": "verteret", "lemma": "verto", "morphologia": "v., 3ª pers., sg., imperf., subj.", "syntaxis": "Verbo de la subordinada final", "translatio": {"es": "derribaría", "en": "would overturn", "zh": "將會推翻"}}, {"textus": "arces;", "lemma": "arx", "morphologia": "f., pl., acc.", "syntaxis": "Objeto directo de verteret", "translatio": {"es": "las ciudadelas", "en": "the citadels", "zh": "城堡"}} ] } ] },
+                    { "numerus": 21, "orationes": [ { "original_lat": "hinc populum late regem belloque superbum", "verba": [ {"textus": "hinc", "lemma": "hinc", "morphologia": "adv.", "syntaxis": "Adverbio de origen", "translatio": {"es": "de aquí", "en": "from here", "zh": "從此"}}, {"textus": "populum", "lemma": "populus", "morphologia": "m., sg., acc.", "syntaxis": "Sujeto acusativo de venturum (esse)", "translatio": {"es": "un pueblo", "en": "a people", "zh": "一個民族"}}, {"textus": "late", "lemma": "late", "morphologia": "adv.", "syntaxis": "Adverbio", "translatio": {"es": "vastamente", "en": "widely", "zh": "廣泛地"}}, {"textus": "regem", "lemma": "rex", "morphologia": "m., sg., acc.", "syntaxis": "Predicativo de populum", "translatio": {"es": "rey", "en": "ruling", "zh": "統治者"}}, {"textus": "belloque", "lemma": "bellum", "morphologia": "n., sg., abl. (+que)", "syntaxis": "Ablativo de especificación", "translatio": {"es": "y en la guerra", "en": "and in war", "zh": "並且在戰爭中"}}, {"textus": "superbum", "lemma": "superbus", "morphologia": "adj., m., sg., acc.", "syntaxis": "Modifica a populum", "translatio": {"es": "soberbio", "en": "proud", "zh": "驕傲的"}} ] } ] },
+                    { "numerus": 22, "orationes": [ { "original_lat": "venturum excidio Libyae: sic volvere Parcas.", "verba": [ {"textus": "venturum", "lemma": "venio", "morphologia": "part., m., sg., acc., fut.", "syntaxis": "Infinitivo futuro (venturum esse)", "translatio": {"es": "que vendría", "en": "would come", "zh": "將會來臨"}}, {"textus": "excidio", "lemma": "excidium", "morphologia": "n., sg., dat.", "syntaxis": "Dativo de finalidad", "translatio": {"es": "para la destrucción", "en": "for the destruction", "zh": "為了毀滅"}}, {"textus": "Libyae:", "lemma": "Libya", "morphologia": "f., sg., gen.", "syntaxis": "Genitivo objetivo", "translatio": {"es": "de Libia", "en": "of Libya", "zh": "利比亞的"}}, {"textus": "sic", "lemma": "sic", "morphologia": "adv.", "syntaxis": "Adverbio de modo", "translatio": {"es": "así", "en": "so", "zh": "如此"}}, {"textus": "volvere", "lemma": "volvo", "morphologia": "v., inf., pres.", "syntaxis": "Infinitivo histórico", "translatio": {"es": "hilaban", "en": "were unrolling", "zh": "展開"}}, {"textus": "Parcas.", "lemma": "Parcae", "morphologia": "f., pl., acc.", "syntaxis": "Sujeto de volvere", "translatio": {"es": "las Parcas", "en": "the Fates", "zh": "命運女神"}} ] } ] },
+                    { "numerus": 23, "orationes": [ { "original_lat": "Id metuens, veterisque memor Saturnia belli,", "verba": [ {"textus": "Id", "lemma": "is", "morphologia": "pron., n., sg., acc.", "syntaxis": "Objeto directo de metuens", "translatio": {"es": "esto", "en": "this", "zh": "這個"}}, {"textus": "metuens,", "lemma": "metuo", "morphologia": "part., f., sg., nom., pres.", "syntaxis": "Participio concertado con Saturnia", "translatio": {"es": "temiendo", "en": "fearing", "zh": "害怕"}}, {"textus": "veterisque", "lemma": "vetus", "morphologia": "adj., n., sg., gen. (+que)", "syntaxis": "Modifica a belli", "translatio": {"es": "y de la antigua", "en": "and of the old", "zh": "和古老的"}}, {"textus": "memor", "lemma": "memor", "morphologia": "adj., f., sg., nom.", "syntaxis": "Modifica a Saturnia", "translatio": {"es": "memorable", "en": "mindful", "zh": "記住的"}}, {"textus": "Saturnia", "lemma": "Saturnia", "morphologia": "f., sg., nom.", "syntaxis": "Sujeto (Juno)", "translatio": {"es": "la Saturnia", "en": "the Saturnian one", "zh": "薩圖恩之女"}}, {"textus": "belli,", "lemma": "bellum", "morphologia": "n., sg., gen.", "syntaxis": "Genitivo objetivo con memor", "translatio": {"es": "guerra", "en": "war", "zh": "戰爭"}} ] } ] },
+                    { "numerus": 24, "orationes": [ { "original_lat": "prima quod ad Troiam pro caris gesserat Argis—", "verba": [ {"textus": "prima", "lemma": "primus", "morphologia": "adv.", "syntaxis": "Adverbio", "translatio": {"es": "a la cabeza", "en": "at the forefront", "zh": "首先"}}, {"textus": "quod", "lemma": "qui", "morphologia": "pron. rel., n., sg., acc.", "syntaxis": "Objeto directo de gesserat", "translatio": {"es": "la cual", "en": "which", "zh": "那個"}}, {"textus": "ad", "lemma": "ad", "morphologia": "prep. + acc.", "syntaxis": "Preposición", "translatio": {"es": "junto a", "en": "at", "zh": "在"}}, {"textus": "Troiam", "lemma": "Troia", "morphologia": "f., sg., acc.", "syntaxis": "Complemento de ad", "translatio": {"es": "Troya", "en": "Troy", "zh": "特洛伊"}}, {"textus": "pro", "lemma": "pro", "morphologia": "prep. + abl.", "syntaxis": "Preposición", "translatio": {"es": "en favor de", "en": "for", "zh": "為了"}}, {"textus": "caris", "lemma": "carus", "morphologia": "adj., m., pl., abl.", "syntaxis": "Modifica a Argis", "translatio": {"es": "sus queridos", "en": "dear", "zh": "親愛的"}}, {"textus": "gesserat", "lemma": "gero", "morphologia": "v., 3ª pers., sg., plusc., ind.", "syntaxis": "Verbo de la relativa", "translatio": {"es": "había hecho", "en": "she had waged", "zh": "她曾發動"}}, {"textus": "Argis—", "lemma": "Argi", "morphologia": "m., pl., abl.", "syntaxis": "Complemento de pro", "translatio": {"es": "Argos", "en": "Argos", "zh": "阿爾戈斯"}} ] } ] },
+                    { "numerus": 25, "orationes": [ { "original_lat": "necdum etiam causae irarum saevique dolores", "verba": [ {"textus": "necdum", "lemma": "necdum", "morphologia": "adv.", "syntaxis": "Adverbio de negación", "translatio": {"es": "y todavía no", "en": "nor yet", "zh": "也還沒有"}}, {"textus": "etiam", "lemma": "etiam", "morphologia": "adv.", "syntaxis": "Adverbio", "translatio": {"es": "también", "en": "also", "zh": "也"}}, {"textus": "causae", "lemma": "causa", "morphologia": "f., pl., nom.", "syntaxis": "Sujeto de exciderant", "translatio": {"es": "las causas", "en": "the causes", "zh": "原因"}}, {"textus": "irarum", "lemma": "ira", "morphologia": "f., pl., gen.", "syntaxis": "Genitivo", "translatio": {"es": "de sus iras", "en": "of her angers", "zh": "她憤怒的"}}, {"textus": "saevique", "lemma": "saevus", "morphologia": "adj., m., pl., nom. (+que)", "syntaxis": "Modifica a dolores", "translatio": {"es": "y crueles", "en": "and cruel", "zh": "和殘酷的"}}, {"textus": "dolores", "lemma": "dolor", "morphologia": "m., pl., nom.", "syntaxis": "Sujeto de exciderant", "translatio": {"es": "dolores", "en": "pains", "zh": "痛苦"}} ] } ] },
+                    { "numerus": 26, "orationes": [ { "original_lat": "exciderant animo: manet alta mente repostum", "verba": [ {"textus": "exciderant", "lemma": "excido", "morphologia": "v., 3ª pers., pl., plusc., ind.", "syntaxis": "Verbo", "translatio": {"es": "se habían borrado", "en": "had fallen", "zh": "已消失"}}, {"textus": "animo:", "lemma": "animus", "morphologia": "m., sg., abl.", "syntaxis": "Ablativo de separación", "translatio": {"es": "de su ánimo", "en": "from her mind", "zh": "從她心中"}}, {"textus": "manet", "lemma": "maneo", "morphologia": "v., 3ª pers., sg., pres., ind.", "syntaxis": "Verbo", "translatio": {"es": "permanece", "en": "remains", "zh": "仍然存在"}}, {"textus": "alta", "lemma": "altus", "morphologia": "adj., f., sg., abl.", "syntaxis": "Modifica a mente", "translatio": {"es": "profunda", "en": "deep", "zh": "深處"}}, {"textus": "mente", "lemma": "mens", "morphologia": "f., sg., abl.", "syntaxis": "Ablativo de lugar", "translatio": {"es": "en la mente", "en": "in her mind", "zh": "在心中"}}, {"textus": "repostum", "lemma": "repono", "morphologia": "part., n., sg., nom., pf.", "syntaxis": "Modifica al sujeto (iudicium)", "translatio": {"es": "guardado", "en": "stored away", "zh": "儲存"}} ] } ] },
+                    { "numerus": 27, "orationes": [ { "original_lat": "iudicium Paridis spretaeque iniuria formae,", "verba": [ {"textus": "iudicium", "lemma": "iudicium", "morphologia": "n., sg., nom.", "syntaxis": "Sujeto de manet", "translatio": {"es": "el juicio", "en": "the judgment", "zh": "審判"}}, {"textus": "Paridis", "lemma": "Paris", "morphologia": "m., sg., gen.", "syntaxis": "Genitivo subjetivo", "translatio": {"es": "de Paris", "en": "of Paris", "zh": "帕里斯的"}}, {"textus": "spretaeque", "lemma": "sperno", "morphologia": "part., f., sg., gen., pf. (+que)", "syntaxis": "Modifica a formae", "translatio": {"es": "y de la despreciada", "en": "and of the scorned", "zh": "和被藐視的"}}, {"textus": "iniuria", "lemma": "iniuria", "morphologia": "f., sg., nom.", "syntaxis": "Sujeto de manet", "translatio": {"es": "la injuria", "en": "the injury", "zh": "侮辱"}}, {"textus": "formae,", "lemma": "forma", "morphologia": "f., sg., gen.", "syntaxis": "Genitivo objetivo con iniuria", "translatio": {"es": "a su belleza", "en": "to her beauty", "zh": "對她的美貌"}} ] } ] },
+                    { "numerus": 28, "orationes": [ { "original_lat": "et genus invisum, et rapti Ganymedis honores.", "verba": [ {"textus": "et", "lemma": "et", "morphologia": "conj.", "syntaxis": "Conjunción", "translatio": {"es": "y", "en": "and", "zh": "和"}}, {"textus": "genus", "lemma": "genus", "morphologia": "n., sg., nom.", "syntaxis": "Sujeto de manet", "translatio": {"es": "el linaje", "en": "the race", "zh": "種族"}}, {"textus": "invisum,", "lemma": "invisus", "morphologia": "adj., n., sg., nom.", "syntaxis": "Modifica a genus", "translatio": {"es": "odiado", "en": "hated", "zh": "被憎恨的"}}, {"textus": "et", "lemma": "et", "morphologia": "conj.", "syntaxis": "Conjunción", "translatio": {"es": "y", "en": "and", "zh": "和"}}, {"textus": "rapti", "lemma": "rapio", "morphologia": "part., m., sg., gen., pf.", "syntaxis": "Modifica a Ganymedis", "translatio": {"es": "del raptado", "en": "of the snatched", "zh": "被綁架的"}}, {"textus": "Ganymedis", "lemma": "Ganymedes", "morphologia": "m., sg., gen.", "syntaxis": "Genitivo posesivo con honores", "translatio": {"es": "Ganimedes", "en": "Ganymede", "zh": "伽倪墨得斯"}}, {"textus": "honores.", "lemma": "honor", "morphologia": "m., pl., nom.", "syntaxis": "Sujeto de manet", "translatio": {"es": "los honores", "en": "the honors", "zh": "榮譽"}} ] } ] },
+                    { "numerus": 29, "orationes": [ { "original_lat": "His accensa super, iactatos aequore toto", "verba": [ {"textus": "His", "lemma": "hic", "morphologia": "pron., f., pl., abl.", "syntaxis": "Ablativo de causa", "translatio": {"es": "por estas cosas", "en": "by these things", "zh": "因這些事"}}, {"textus": "accensa", "lemma": "accendo", "morphologia": "part., f., sg., nom., pf.", "syntaxis": "Participio concertado con Saturnia (Juno)", "translatio": {"es": "encendida", "en": "inflamed", "zh": "被激怒"}}, {"textus": "super,", "lemma": "super", "morphologia": "adv.", "syntaxis": "Adverbio", "translatio": {"es": "además", "en": "moreover", "zh": "此外"}}, {"textus": "iactatos", "lemma": "iacto", "morphologia": "part., m., pl., acc., pf.", "syntaxis": "Modifica a Troas", "translatio": {"es": "zarandeados", "en": "tossed", "zh": "被拋擲"}}, {"textus": "aequore", "lemma": "aequor", "morphologia": "n., sg., abl.", "syntaxis": "Ablativo de lugar", "translatio": {"es": "en el mar", "en": "on the sea", "zh": "在海上"}}, {"textus": "toto", "lemma": "totus", "morphologia": "adj., n., sg., abl.", "syntaxis": "Modifica a aequore", "translatio": {"es": "entero", "en": "whole", "zh": "整個"}} ] } ] },
+                    { "numerus": 30, "orationes": [ { "original_lat": "Troas, reliquias Danaum atque immitis Achilli,", "verba": [ {"textus": "Troas,", "lemma": "Tros", "morphologia": "m., pl., acc.", "syntaxis": "Objeto directo de arcebat", "translatio": {"es": "a los troyanos", "en": "the Trojans", "zh": "特洛伊人"}}, {"textus": "reliquias", "lemma": "reliquiae", "morphologia": "f., pl., acc.", "syntaxis": "Aposición a Troas", "translatio": {"es": "restos", "en": "remnants", "zh": "殘餘"}}, {"textus": "Danaum", "lemma": "Danai", "morphologia": "m., pl., gen.", "syntaxis": "Genitivo (de Danaorum)", "translatio": {"es": "de los dánaos", "en": "of the Danaans", "zh": "達南人的"}}, {"textus": "atque", "lemma": "atque", "morphologia": "conj.", "syntaxis": "Conjunción", "translatio": {"es": "y", "en": "and", "zh": "和"}}, {"textus": "immitis", "lemma": "immitis", "morphologia": "adj., m., sg., gen.", "syntaxis": "Modifica a Achilli", "translatio": {"es": "del cruel", "en": "of the ruthless", "zh": "殘酷的"}}, {"textus": "Achilli,", "lemma": "Achilles", "morphologia": "m., sg., gen.", "syntaxis": "Genitivo", "translatio": {"es": "Aquiles", "en": "Achilles", "zh": "阿喀琉斯"}} ] } ] },
+                    { "numerus": 31, "orationes": [ { "original_lat": "arcebat longe Latio, multosque per annos", "verba": [ {"textus": "arcebat", "lemma": "arceo", "morphologia": "v., 3ª pers., sg., imperf., ind.", "syntaxis": "Verbo principal", "translatio": {"es": "mantenía alejado", "en": "she was keeping", "zh": "她使遠離"}}, {"textus": "longe", "lemma": "longe", "morphologia": "adv.", "syntaxis": "Adverbio", "translatio": {"es": "lejos", "en": "far", "zh": "遠"}}, {"textus": "Latio,", "lemma": "Latium", "morphologia": "n., sg., abl.", "syntaxis": "Ablativo de separación", "translatio": {"es": "del Lacio", "en": "from Latium", "zh": "從拉提姆"}}, {"textus": "multosque", "lemma": "multus", "morphologia": "adj., m., pl., acc. (+que)", "syntaxis": "Modifica a annos", "translatio": {"es": "y por muchos", "en": "and for many", "zh": "並且許多"}}, {"textus": "per", "lemma": "per", "morphologia": "prep. + acc.", "syntaxis": "Preposición", "translatio": {"es": "durante", "en": "through", "zh": "經過"}}, {"textus": "annos", "lemma": "annus", "morphologia": "m., pl., acc.", "syntaxis": "Complemento de per", "translatio": {"es": "años", "en": "years", "zh": "年"}} ] } ] },
+                    { "numerus": 32, "orationes": [ { "original_lat": "errabant, acti fatis, maria omnia circum.", "verba": [ {"textus": "errabant,", "lemma": "erro", "morphologia": "v., 3ª pers., pl., imperf., ind.", "syntaxis": "Verbo", "translatio": {"es": "vagaban", "en": "they were wandering", "zh": "他們流浪"}}, {"textus": "acti", "lemma": "ago", "morphologia": "part., m., pl., nom., pf.", "syntaxis": "Participio concertado con el sujeto (Troes)", "translatio": {"es": "impulsados", "en": "driven", "zh": "被驅使"}}, {"textus": "fatis,", "lemma": "fatum", "morphologia": "n., pl., abl.", "syntaxis": "Ablativo agente", "translatio": {"es": "por los hados", "en": "by the fates", "zh": "因命運"}}, {"textus": "maria", "lemma": "mare", "morphologia": "n., pl., acc.", "syntaxis": "Complemento de circum", "translatio": {"es": "los mares", "en": "the seas", "zh": "海洋"}}, {"textus": "omnia", "lemma": "omnis", "morphologia": "adj., n., pl., acc.", "syntaxis": "Modifica a maria", "translatio": {"es": "todos", "en": "all", "zh": "所有"}}, {"textus": "circum.", "lemma": "circum", "morphologia": "prep. + acc.", "syntaxis": "Preposición (postpuesta)", "translatio": {"es": "alrededor de", "en": "around", "zh": "環繞"}} ] } ] },
+                    { "numerus": 33, "orationes": [ { "original_lat": "Tantae molis erat Romanam condere gentem.", "verba": [ {"textus": "Tantae", "lemma": "tantus", "morphologia": "adj., f., sg., gen.", "syntaxis": "Genitivo de cualidad (predicado)", "translatio": {"es": "de tan gran", "en": "of so great", "zh": "如此巨大"}}, {"textus": "molis", "lemma": "moles", "morphologia": "f., sg., gen.", "syntaxis": "Genitivo de cualidad (predicado)", "translatio": {"es": "esfuerzo", "en": "an effort", "zh": "的努力"}}, {"textus": "erat", "lemma": "sum", "morphologia": "v., 3ª pers., sg., imperf., ind.", "syntaxis": "Verbo copulativo", "translatio": {"es": "era", "en": "it was", "zh": "是"}}, {"textus": "Romanam", "lemma": "Romanus", "morphologia": "adj., f., sg., acc.", "syntaxis": "Modifica a gentem", "translatio": {"es": "romana", "en": "the Roman", "zh": "羅馬的"}}, {"textus": "condere", "lemma": "condo", "morphologia": "v., inf., pres., act.", "syntaxis": "Sujeto (infinitivo sustantivado)", "translatio": {"es": "fundar", "en": "to found", "zh": "建立"}}, {"textus": "gentem.", "lemma": "gens", "morphologia": "f., sg., acc.", "syntaxis": "Objeto directo de condere", "translatio": {"es": "la estirpe", "en": "race", "zh": "民族"}} ] } ] }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof corpus === 'undefined') {
+                console.error("Error: El objeto 'corpus' no está definido.");
+                return;
+            }
+
+            const mainTitleElem = document.getElementById('main-title');
+            const subtitleElem = document.getElementById('subtitle');
+            const authorElem = document.getElementById('author');
+            const contextTitleElem = document.getElementById('context-title');
+            const contextContentElem = document.getElementById('context-content');
+            const textTitleElem = document.getElementById('text-title');
+            const paragrafusContentusElem = document.getElementById('paragrafus-contentus');
+            const marginaliaContentusElem = document.getElementById('marginalia-contentus');
+            const footerElem = document.getElementById('footer-text');
+            const langSwitcher = document.getElementById('language-switcher');
+            
+            let currentLang = 'es';
+
+            function renderContent() {
+                mainTitleElem.textContent = corpus.titulus_principalis;
+                subtitleElem.textContent = corpus.titulus_secundarius[currentLang];
+                authorElem.textContent = corpus.auctor;
+                
+                contextTitleElem.textContent = corpus.introductio[currentLang].titulus;
+                contextContentElem.innerHTML = corpus.introductio[currentLang].contentus;
+                
+                textTitleElem.textContent = currentLang === 'es' ? 'Texto y Análisis' : (currentLang === 'en' ? 'Text and Analysis' : '文本與分析');
+                
+                buildLatinText();
+                
+                footerElem.textContent = `© ${new Date().getFullYear()} - Análisis Interactivo.`;
+            }
+
+            function buildLatinText() {
+                paragrafusContentusElem.innerHTML = ''; 
+                corpus.textus.capitula.forEach((versus, versusIndex) => {
+                    const p = document.createElement('p');
+                    p.className = "mb-6 textum-classicum"; 
+                    p.innerHTML += `<span class="verse-number mr-2">${versus.numerus}. </span>`; 
+                    versus.orationes.forEach((sententia, sententiaIndex) => {
+                        const words = sententia.original_lat.split(/(\s+)/);
+                        words.forEach(word => {
+                            if (!word.trim()) {
+                                p.appendChild(document.createTextNode(word));
+                                return;
+                            }
+                            const cleanWord = word.replace(/[,.;:?]/g, '');
+                            const verbumData = sententia.verba.find(v => v.textus.replace(/[,.;:?]/g, '') === cleanWord);
+
+                            if (verbumData) {
+                                const span = document.createElement('span');
+                                span.textContent = word;
+                                span.className = 'verbum';
+                                span.dataset.versusIndex = versusIndex;
+                                span.dataset.sententiaIndex = sententiaIndex;
+                                span.dataset.verbumTextus = verbumData.textus;
+                                p.appendChild(span);
+                            } else {
+                                p.appendChild(document.createTextNode(word));
+                            }
+                        });
+                    });
+                    paragrafusContentusElem.appendChild(p);
+                });
+            }
+
+            function showAnalysis(clickedSpan) {
+                const { versusIndex, sententiaIndex, verbumTextus } = clickedSpan.dataset;
+                const sententiaData = corpus.textus.capitula[versusIndex].orationes[sententiaIndex];
+                const verbumData = sententiaData.verba.find(v => v.textus.replace(/[,.;:?]/g, '') === verbumTextus.replace(/[,.;:?]/g, ''));
+                if (!verbumData) return;
+
+                const palabraTraducida = verbumData.translatio ? verbumData.translatio[currentLang] : 'N/A';
+                
+                marginaliaContentusElem.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-2xl textum-classicum font-bold">${verbumData.textus}</p>
+                            <p class="text-lg font-semibold mb-2">${palabraTraducida}</p> 
+                            <p class="text-sm"><b>Lema:</b> <i>${verbumData.lemma}</i></p>
+                            <p class="text-sm"><b>Morfología:</b> ${verbumData.morphologia}</p>
+                            <p class="text-sm"><b>Sintaxis:</b> ${verbumData.syntaxis}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            paragrafusContentusElem.addEventListener('click', (e) => {
+                if (e.target.classList.contains('verbum')) {
+                    document.querySelectorAll('.verbum').forEach(el => el.classList.remove('activus'));
+                    e.target.classList.add('activus');
+                    showAnalysis(e.target);
+                }
+            });
+
+            langSwitcher.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const newLang = e.target.dataset.lang;
+                    if (newLang !== currentLang) {
+                        currentLang = newLang;
+                        langSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
+                            btn.classList.toggle('active-lang', btn.dataset.lang === newLang);
+                        });
+                        renderContent();
+                        const activeWord = document.querySelector('.verbum.activus');
+                        if (activeWord) {
+                            showAnalysis(activeWord);
+                        } else {
+                            marginaliaContentusElem.innerHTML = `<p class="text-[#6d4c35] font-['IM_Fell_English']">Haz clic en una palabra en el texto para ver su análisis.</p>`;
+                        }
+                    }
+                }
+            });
+
+            renderContent();
+        });
+    </script>
+</body>
+</html>
