@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. VERIFICACIÓN INICIAL
     if (typeof corpus === 'undefined') {
-        console.error("Error: El objeto 'corpus' no está definido. Asegúrate de que tu archivo de datos (ej: datos_verso1.js) se está cargando correctamente y antes que 'logica.js'.");
+        console.error("Error: El objeto 'corpus' no está definido.");
         return;
     }
 
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         subtitleElem.textContent = corpus.titulus_secundarius[currentLang];
         authorElem.textContent = corpus.auctor;
         
-        // La Eneida tiene versos, no capítulos. He adaptado la nomenclatura
         contextTitleElem.textContent = corpus.introductio[currentLang].titulus;
         contextContentElem.innerHTML = corpus.introductio[currentLang].contentus;
         
@@ -41,23 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function buildLatinText() {
         paragrafusContentusElem.innerHTML = ''; 
-
-        // Renombramos la variable 'capitulum' a 'versus' (verso) para mayor coherencia.
         corpus.textus.capitula.forEach((versus, versusIndex) => {
             const p = document.createElement('p');
-            p.className = "mb-6 textum-classicum"; // Añadimos la clase para la tipografía
-            p.innerHTML += `<span class="verse-number font-bold mr-2 text-gray-400">${versus.numerus}. </span>`; // Añadimos el número de verso
-            
-            // Renombramos la variable 'oratio' a 'sententia' para mayor claridad en el contexto de la poesía.
+            p.className = "mb-6 textum-classicum"; 
+            p.innerHTML += `<span class="verse-number mr-2">${versus.numerus}. </span>`; 
             versus.orationes.forEach((sententia, sententiaIndex) => {
                 const words = sententia.original_lat.split(/(\s+)/);
-
                 words.forEach(word => {
                     if (!word.trim()) {
                         p.appendChild(document.createTextNode(word));
                         return;
                     }
-                    
                     const cleanWord = word.replace(/[,.;:]/g, '');
                     const verbumData = sententia.verba.find(v => v.textus.replace(/[,.;:]/g, '') === cleanWord);
 
@@ -78,16 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Muestra el análisis de una palabra en la barra lateral.
-     * @param {HTMLElement} clickedSpan - El elemento <span> de la palabra que fue clickeada.
-     */
     function showAnalysis(clickedSpan) {
-        // Adaptamos las variables de dataset
         const { versusIndex, sententiaIndex, verbumTextus } = clickedSpan.dataset;
         const sententiaData = corpus.textus.capitula[versusIndex].orationes[sententiaIndex];
         const verbumData = sententiaData.verba.find(v => v.textus.replace(/[,.;:]/g, '') === verbumTextus.replace(/[,.;:]/g, ''));
-
         if (!verbumData) return;
 
         const palabraTraducida = verbumData.translatio ? verbumData.translatio[currentLang] : 'N/A';
@@ -96,42 +83,36 @@ document.addEventListener('DOMContentLoaded', () => {
         marginaliaContentusElem.innerHTML = `
             <div class="space-y-4">
                 <div>
-                    <p class="text-2xl textum-classicum text-gray-800 font-bold">${verbumData.textus}</p>
-                    
-                    <p class="text-lg text-blue-600 font-semibold mb-2">${palabraTraducida}</p> 
-
-                    <p class="text-sm text-gray-600"><b>Lema:</b> <i>${verbumData.lemma}</i></p>
-                    <p class="text-sm text-gray-600"><b>Morfología:</b> ${verbumData.morphologia}</p>
-                    <p class="text-sm text-gray-600"><b>Sintaxis:</b> ${verbumData.syntaxis}</p>
+                    <p class="text-2xl textum-classicum font-bold">${verbumData.textus}</p>
+                    <p class="text-lg font-semibold mb-2">${palabraTraducida}</p> 
+                    <p class="text-sm"><b>Lema:</b> <i>${verbumData.lemma}</i></p>
+                    <p class="text-sm"><b>Morfología:</b> ${verbumData.morphologia}</p>
+                    <p class="text-sm"><b>Sintaxis:</b> ${verbumData.syntaxis}</p>
                 </div>
-                <hr>
+                <hr class="divider" style="margin: 1rem 0;">
                 <details open>
-                    <summary class="font-semibold text-gray-700">Traducción del Verso</summary>
-                    <div class="details-content mt-2 text-sm text-gray-700">
+                    <summary class="font-semibold">Traducción del Verso</summary>
+                    <div class="details-content mt-2 text-sm">
                         <p>${oratioTraducida}</p>
                     </div>
                 </details>
                 ${sententiaData.ordo_syntacticus ? `
                 <details>
-                    <summary class="font-semibold text-gray-700">Orden Sintáctico</summary>
-                    <div class="details-content mt-2 text-sm text-gray-700">
-                        <code>${sententiaData.ordo_syntacticus}</code>
+                    <summary class="font-semibold">Orden Sintáctico</summary>
+                    <div class="details-content mt-2 text-sm">
+                        <p><code>${sententiaData.ordo_syntacticus}</code></p>
                     </div>
                 </details>` : ''}
                 ${sententiaData.notae ? `
                 <details>
-                    <summary class="font-semibold text-gray-700">Notas Adicionales</summary>
-                    <div class="details-content mt-2 text-sm text-gray-700">
+                    <summary class="font-semibold">Notas Adicionales</summary>
+                    <div class="details-content mt-2 text-sm">
                         <p>${sententiaData.notae}</p>
                     </div>
                 </details>` : ''}
             </div>
         `;
     }
-
-    // =========================================================================================
-    // === MANEJADORES DE EVENTOS ===
-    // =========================================================================================
     
     paragrafusContentusElem.addEventListener('click', (e) => {
         if (e.target.classList.contains('verbum')) {
@@ -150,13 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.classList.toggle('active-lang', btn.dataset.lang === newLang);
                 });
                 renderContent();
-                marginaliaContentusElem.innerHTML = '';
+                marginaliaContentusElem.innerHTML = `<p class="text-[#6d4c35] font-['IM_Fell_English']">Haz clic en una palabra en el texto para ver su análisis.</p>`;
             }
         }
     });
 
-    // =========================================================================================
-    // === INICIALIZACIÓN ===
-    // =========================================================================================
     renderContent();
 });
