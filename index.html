@@ -4,51 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virgilio, Aeneis - Liber I (Índice)</title>
-    <link rel="stylesheet" href="estilos.css">
-    <style>
-        /* Estilos adicionales para el índice de capítulos */
-        body { background-color: #f3f0e9; }
-        .index-container { text-align: center; background-color: white; padding: 2rem 3rem; margin: 2rem auto; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); max-width: 90%; width: 1200px;}
-        .index-container h1 { font-family: 'Georgia', 'Times New Roman', serif; font-size: 2.5rem; margin-bottom: 0.5rem; color: #333; }
-        .index-container h2 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.25rem; margin-bottom: 1.5rem; color: #555; font-weight: 400;}
 
-        /* Rejilla para la lista de capítulos */
+    <!-- Google Fonts para la tipografía manuscrita -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* --- ESTILOS DE ÍNDICE PERSONALIZADOS PARA EL TEMA MEDIEVAL --- */
+
+        /* Fondo de la página, simulando una mesa de madera oscura */
+        body {
+            background-color: #3d2c1d;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #4a3a2a;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        /* Contenedor principal que simula una hoja de libro de pergamino */
+        .index-container {
+            background-color: #fdf5e6;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+            border: 1px solid #c9b79c;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            padding: 2.5rem 3rem;
+            margin: 2rem auto;
+            border-radius: 4px;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        /* Tipografía y colores de los títulos */
+        .index-container h1 { 
+            font-family: 'IM Fell English', 'Georgia', serif; 
+            font-size: 3.5rem; 
+            margin-bottom: 0.5rem; 
+            color: #6d4c35; 
+            font-weight: bold;
+        }
+        .index-container h2 { 
+            font-family: 'IM Fell English', 'Georgia', serif; 
+            font-size: 1.75rem; 
+            margin-bottom: 2rem; 
+            color: #8c785c; 
+            font-weight: normal;
+        }
+        
+        /* Rejilla para la lista de capítulos/versos */
         .chapter-grid {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
             text-align: left;
         }
+        
         .chapter-grid li a {
             text-decoration: none;
-            color: #4a4a4a;
-            font-size: 1rem;
+            color: #4a3a2a;
+            font-size: 1.1rem;
             font-weight: 600;
             padding: 0.75rem 1rem;
-            border: 1px solid #d6d3d1;
+            border: 1px solid #d1c4b0;
             border-radius: 0.25rem;
             transition: all 0.2s;
             display: flex;
             flex-direction: column;
             height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            font-family: 'IM Fell English', 'Georgia', serif;
         }
+        
         .chapter-grid li a:hover {
-            background-color: #4a4a4a;
-            color: white;
-            border-color: #4a4a4a;
+            background-color: #f0e6d8;
+            color: #3d2c1d;
+            border-color: #8c785c;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
+        
         .chapter-grid .chapter-title {
-            font-size: 0.85rem;
-            font-weight: 400;
+            font-size: 0.95rem;
+            font-weight: normal;
             opacity: 0.8;
             margin-top: 0.25rem;
+            color: #8c785c;
         }
 
-        #language-switcher { max-width: 300px; margin: 0 auto 1.5rem auto; }
+        /* Estilos del selector de idioma */
+        #language-switcher { 
+            max-width: 300px; 
+            margin: 0 auto 1.5rem auto; 
+            display: flex; 
+            gap: 0.5rem;
+        }
+        .lang-btn {
+            flex-grow: 1; 
+            padding: 0.5rem; 
+            border: 1px solid #d1c4b0; 
+            background-color: #f5eadb; 
+            color: #6d4c35;
+            border-radius: 0.25rem; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: all 0.2s; 
+            font-size: 0.875rem;
+        }
+        .lang-btn:hover { background-color: #e9dcc9; }
+        .lang-btn.active-lang { 
+            background-color: #6d4c35; 
+            color: #fdf5e6; 
+            border-color: #6d4c35; 
+        }
     </style>
 </head>
 <body>
@@ -63,7 +140,7 @@
         <h2 id="subtitle">Liber Primus</h2>
 
         <ul class="chapter-grid">
-            </ul>
+        </ul>
     </div>
 
 <script>
@@ -74,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtitle = document.getElementById('subtitle');
     const langSwitcher = document.getElementById('language-switcher');
     
-    // Objeto con todas las traducciones para el índice
     const translations = {
         es: {
             mainTitle: "Eneida",
@@ -106,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainTitle: "埃涅阿斯紀",
             subtitle: "第一卷",
             chapters: [
-                "第 1-11 行：序言（呼喚謬斯）", "第 12-33 行：朱諾的憤怒", "第 34-63 行：特洛伊命運的預言", "第 64-80 行：埃奧羅斯與風暴",
+                "第 1-11 行：序言（呼喚繆斯）", "第 12-33 行：朱諾的憤怒", "第 34-63 行：特洛伊命運的預言", "第 64-80 行：埃奧羅斯與風暴",
                 "第 81-123 行：海上的暴風雨", "第 124-156 行：海王星平息風暴", "第 157-209 行：埃涅阿斯抵達利比亞", "第 210-222 行：宴會與特洛伊人的士氣",
                 "第 223-253 行：維納斯向朱庇特求情", "第 254-296 行：朱庇特關於羅馬命運的預言", "第 297-304 行：墨丘利被派往迦太基", "第 305-320 行：埃涅阿斯探查陸地",
                 "第 321-417 行：埃涅阿斯與維納斯的顯現", "第 418-450 行：迦太基的建設", "第 451-493 行：特洛伊人驚嘆朱諾神殿的壁畫", "第 494-519 行：狄多和埃涅阿斯同伴的到來",
@@ -114,22 +190,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 "第 613-642 行：歡迎宴會", "第 643-694 行：維納斯準備丘比特的欺騙", "第 695-722 行：阿斯卡尼烏斯（丘比特）抵達宮殿", "第 723-756 行：宴會與伊俄帕斯的歌唱",
                 "第 757-781 行：狄多請埃涅阿斯講述他的故事"
             ]
-        }
+        },
     };
 
     function generateChapterLinks(lang) {
-        chapterList.innerHTML = ''; // Limpiar la lista actual
+        chapterList.innerHTML = '';
         const chapterTitles = translations[lang].chapters;
         
         chapterTitles.forEach((fullTitle, index) => {
-            // Utilizamos el índice para crear el nombre del archivo. 
-            // Esto es más apropiado para la Eneida, que no tiene una estructura de capítulos numerada de forma tradicional.
             const chapterNum = index + 1;
             const [title, description] = fullTitle.split(': ');
 
             const listItem = document.createElement('li');
             const link = document.createElement('a');
-            link.href = `verso${chapterNum}.html`; // Nomenclatura sugerida: verso, no capítulo.
+            link.href = `verso${chapterNum}.html`;
             link.innerHTML = `${title}<span class="chapter-title">${description || ''}</span>`;
             
             listItem.appendChild(link);
@@ -138,14 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function changeLanguage(lang) {
-        // Actualizar títulos
         mainTitle.textContent = translations[lang].mainTitle;
         subtitle.textContent = translations[lang].subtitle;
-
-        // Regenerar la lista de capítulos en el nuevo idioma
         generateChapterLinks(lang);
-
-        // Actualizar el botón activo
         langSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active-lang');
             if (btn.dataset.lang === lang) {
@@ -154,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Manejador de eventos para los botones
     langSwitcher.addEventListener('click', (e) => {
         if (e.target.tagName === 'BUTTON') {
             const lang = e.target.dataset.lang;
@@ -162,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Carga inicial en español
     changeLanguage('es');
 });
 </script>
