@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virgilio, Aeneis - Liber I (Índice)</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos adicionales para el índice de capítulos */
+        body { background-color: #f3f0e9; }
+        .index-container { text-align: center; background-color: white; padding: 2rem 3rem; margin: 2rem auto; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); max-width: 90%; width: 1200px;}
+        .index-container h1 { font-family: 'Georgia', 'Times New Roman', serif; font-size: 2.5rem; margin-bottom: 0.5rem; color: #333; }
+        .index-container h2 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.25rem; margin-bottom: 1.5rem; color: #555; font-weight: 400;}
+
+        /* Rejilla para la lista de capítulos */
+        .chapter-grid {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+            gap: 1rem;
+            text-align: left;
+        }
+        .chapter-grid li a {
+            text-decoration: none;
+            color: #4a4a4a;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d6d3d1;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .chapter-grid li a:hover {
+            background-color: #4a4a4a;
+            color: white;
+            border-color: #4a4a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .chapter-grid .chapter-title {
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        #language-switcher { max-width: 300px; margin: 0 auto 1.5rem auto; }
+    </style>
+</head>
+<body>
+    <div class="index-container">
+        <div id="language-switcher" class="mb-4">
+            <button data-lang="es" class="lang-btn active-lang">Español</button>
+            <button data-lang="en" class="lang-btn">English</button>
+            <button data-lang="zh" class="lang-btn">中文 (繁體)</button>
+        </div>
+
+        <h1 id="main-title">Aeneis</h1>
+        <h2 id="subtitle">Liber Primus</h2>
+
+        <ul class="chapter-grid">
+            </ul>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const chapterList = document.querySelector('.chapter-grid');
+    const mainTitle = document.getElementById('main-title');
+    const subtitle = document.getElementById('subtitle');
+    const langSwitcher = document.getElementById('language-switcher');
+    
+    // Objeto con todas las traducciones para el índice
+    const translations = {
+        es: {
+            mainTitle: "Eneida",
+            subtitle: "Libro Primero",
+            chapters: [
+                "Versos 1-11: Proemio (Invocación a la Musa)", "Versos 12-33: La ira de Juno", "Versos 34-63: La profecía del destino de Troya", "Versos 64-80: Eolo y la tormenta",
+                "Versos 81-123: La tempestad en el mar", "Versos 124-156: Neptuno calma la tormenta", "Versos 157-209: Eneas y la llegada a Libia", "Versos 210-222: El banquete y el ánimo de los troyanos",
+                "Versos 223-253: La súplica de Venus a Júpiter", "Versos 254-296: La profecía de Júpiter sobre el destino de Roma", "Versos 297-304: Mercurio es enviado a Cartago", "Versos 305-320: Eneas explora la tierra",
+                "Versos 321-417: Eneas y la aparición de Venus", "Versos 418-450: La construcción de Cartago", "Versos 451-493: Los troyanos se asombran ante los frescos del templo de Juno", "Versos 494-519: La llegada de Dido y los compañeros de Eneas",
+                "Versos 520-560: Ilioneo se presenta ante Dido", "Versos 561-578: Dido se compadece de los troyanos", "Versos 579-593: Eneas se revela a Dido", "Versos 594-612: La gratitud de Eneas",
+                "Versos 613-642: El banquete de bienvenida", "Versos 643-694: Venus prepara el engaño de Cupido", "Versos 695-722: La llegada de Ascanius (Cupido) al palacio", "Versos 723-756: El banquete y el canto de Iopas",
+                "Versos 757-781: Dido le pide a Eneas que cuente su historia"
+            ]
+        },
+        en: {
+            mainTitle: "Aeneid",
+            subtitle: "Book One",
+            chapters: [
+                "Verses 1-11: Proem (Invocation to the Muse)", "Verses 12-33: The wrath of Juno", "Verses 34-63: The prophecy of Troy's destiny", "Verses 64-80: Aeolus and the storm",
+                "Verses 81-123: The tempest at sea", "Verses 124-156: Neptune calms the storm", "Verses 157-209: Aeneas and the arrival in Libya", "Verses 210-222: The feast and the Trojans' morale",
+                "Verses 223-253: Venus' plea to Jupiter", "Verses 254-296: Jupiter's prophecy about the destiny of Rome", "Verses 297-304: Mercury is sent to Carthage", "Verses 305-320: Aeneas explores the land",
+                "Verses 321-417: Aeneas and the appearance of Venus", "Verses 418-450: The founding of Carthage", "Verses 451-493: The Trojans marvel at the frescoes in Juno's temple", "Verses 494-519: The arrival of Dido and Aeneas' companions",
+                "Verses 520-560: Ilioneus presents himself to Dido", "Verses 561-578: Dido pities the Trojans", "Verses 579-593: Aeneas reveals himself to Dido", "Verses 594-612: Aeneas' gratitude",
+                "Verses 613-642: The welcome banquet", "Verses 643-694: Venus prepares Cupid's deception", "Verses 695-722: The arrival of Ascanius (Cupid) at the palace", "Verses 723-756: The banquet and the song of Iopas",
+                "Verses 757-781: Dido asks Aeneas to tell his story"
+            ]
+        },
+        zh: {
+            mainTitle: "埃涅阿斯紀",
+            subtitle: "第一卷",
+            chapters: [
+                "第 1-11 行：序言（呼喚謬斯）", "第 12-33 行：朱諾的憤怒", "第 34-63 行：特洛伊命運的預言", "第 64-80 行：埃奧羅斯與風暴",
+                "第 81-123 行：海上的暴風雨", "第 124-156 行：海王星平息風暴", "第 157-209 行：埃涅阿斯抵達利比亞", "第 210-222 行：宴會與特洛伊人的士氣",
+                "第 223-253 行：維納斯向朱庇特求情", "第 254-296 行：朱庇特關於羅馬命運的預言", "第 297-304 行：墨丘利被派往迦太基", "第 305-320 行：埃涅阿斯探查陸地",
+                "第 321-417 行：埃涅阿斯與維納斯的顯現", "第 418-450 行：迦太基的建設", "第 451-493 行：特洛伊人驚嘆朱諾神殿的壁畫", "第 494-519 行：狄多和埃涅阿斯同伴的到來",
+                "第 520-560 行：伊利奧紐斯在狄多面前陳述", "第 561-578 行：狄多憐憫特洛伊人", "第 579-593 行：埃涅阿斯向狄多現身", "第 594-612 行：埃涅阿斯的感激",
+                "第 613-642 行：歡迎宴會", "第 643-694 行：維納斯準備丘比特的欺騙", "第 695-722 行：阿斯卡尼烏斯（丘比特）抵達宮殿", "第 723-756 行：宴會與伊俄帕斯的歌唱",
+                "第 757-781 行：狄多請埃涅阿斯講述他的故事"
+            ]
+        }
+    };
+
+    function generateChapterLinks(lang) {
+        chapterList.innerHTML = ''; // Limpiar la lista actual
+        const chapterTitles = translations[lang].chapters;
+        
+        chapterTitles.forEach((fullTitle, index) => {
+            // Utilizamos el índice para crear el nombre del archivo. 
+            // Esto es más apropiado para la Eneida, que no tiene una estructura de capítulos numerada de forma tradicional.
+            const chapterNum = index + 1;
+            const [title, description] = fullTitle.split(': ');
+
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `verso${chapterNum}.html`; // Nomenclatura sugerida: verso, no capítulo.
+            link.innerHTML = `${title}<span class="chapter-title">${description || ''}</span>`;
+            
+            listItem.appendChild(link);
+            chapterList.appendChild(listItem);
+        });
+    }
+
+    function changeLanguage(lang) {
+        // Actualizar títulos
+        mainTitle.textContent = translations[lang].mainTitle;
+        subtitle.textContent = translations[lang].subtitle;
+
+        // Regenerar la lista de capítulos en el nuevo idioma
+        generateChapterLinks(lang);
+
+        // Actualizar el botón activo
+        langSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active-lang');
+            if (btn.dataset.lang === lang) {
+                btn.classList.add('active-lang');
+            }
+        });
+    }
+
+    // Manejador de eventos para los botones
+    langSwitcher.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            const lang = e.target.dataset.lang;
+            changeLanguage(lang);
+        }
+    });
+
+    // Carga inicial en español
+    changeLanguage('es');
+});
+</script>
+
+</body>
+</html>
